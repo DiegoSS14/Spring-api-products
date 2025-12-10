@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.dev.diego.backend.exceptions.ProductNotFound;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -13,5 +15,9 @@ public class ProductService {
 
     public List<ProductModel> getAll() {
         return productRepository.findAll();
+    }
+
+    public ProductModel findById(Integer id) {
+        return productRepository.findById(id).orElseThrow(ProductNotFound::new);
     }
 }
