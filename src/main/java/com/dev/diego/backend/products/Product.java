@@ -13,37 +13,35 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "products")
-@Getter 
-@Setter 
-@AllArgsConstructor 
+@Getter
+@Setter
 @NoArgsConstructor
-public class ProductModel {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="price", nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @Column(name="insert_in", nullable = false)
+    @Column(name = "insert_in", nullable = false)
     @CurrentTimestamp
     private Date insertIn;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="category")
+    @Column(name = "category")
     private Category category;
 }
