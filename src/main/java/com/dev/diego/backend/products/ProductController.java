@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.diego.backend.products.dto.ProductDTO;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -33,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody ProductDTO product) {
+    public ResponseEntity<Product> create(@Valid @RequestBody ProductDTO product) {
         Product productEntity = productService.create(product);
         return ResponseEntity.created(URI.create("/" + productEntity.getId())).body(productEntity);
     }
