@@ -19,15 +19,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public List<Product> getAll() {
-        return productRepository.findAll();
+    public List<ProductDTO> getAll() {
+        return productRepository.findAll().stream().map(product -> productMapper.entityToDTO(product)).toList();
     }
 
-    public Product findById(Integer id) {
-        return productRepository.findById(id).orElseThrow(ProductNotFound::new);
+    public ProductDTO findById(Integer id) {
+        Product productEntity = productRepository.findById(id).orElseThrow(ProductNotFound::new);
+        return productMapper.entityToDTO(productEntity);
     }
 
-    public Product create(ProductDTO product) {
-        return productRepository.save(productMapper.DTOtoEntity(product));
+    public ProductDTO create(ProductDTO product) {
+        Product productEntity = productRepository.saveAndFlush(productMapper.DTOtoEntity(product));
+        return productMapper.entityToDTO(productEntity);
     }
 }

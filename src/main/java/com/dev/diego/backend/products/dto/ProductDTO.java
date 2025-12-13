@@ -1,6 +1,8 @@
 package com.dev.diego.backend.products.dto;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.Optional;
 
 import com.dev.diego.backend.products.Category;
 
@@ -19,6 +21,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductDTO {
 
+    private Optional<Integer> id;
+
     @NotBlank(message = "Field name is required")
     @Size(min = 3, max = 255, message = "The name must have between 3 and 255 characters")
     private String name;
@@ -29,6 +33,8 @@ public class ProductDTO {
     @NotNull(message = "Field price is required")
     @Positive(message = "The price should be positive")
     private BigDecimal price;
+
+    private Optional<Date> insertIn;
     
     @NotNull(message = "Field category is required")
     private Category category;
