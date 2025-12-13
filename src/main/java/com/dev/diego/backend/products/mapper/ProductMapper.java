@@ -5,13 +5,15 @@ import java.util.Optional;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.dev.diego.backend.products.Product;
 import com.dev.diego.backend.products.dto.ProductDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ProductMapper {
         // será preenchido pelo @CurrentTimestamp / banco
     @Mappings({

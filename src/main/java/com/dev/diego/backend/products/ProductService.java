@@ -1,6 +1,7 @@
 package com.dev.diego.backend.products;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,28 @@ public class ProductService {
     public ProductDTO create(ProductDTO product) {
         Product productEntity = productRepository.saveAndFlush(productMapper.DTOtoEntity(product));
         return productMapper.entityToDTO(productEntity);
+    }
+
+    public ProductDTO editProduct(Integer id , ProductDTO productEdit) {
+        Product originalProduct = productMapper.DTOtoEntity(this.findById(id));
+        if (productEdit.getName() != null) {
+            originalProduct.setName(productEdit.getName());
+        }
+        if (productEdit.getDescription() != null) {
+            originalProduct.setDescription(productEdit.getDescription());
+        }
+        if (productEdit.getPrice() != null) {
+            originalProduct.setPrice(productEdit.getPrice());
+        }
+        if (productEdit.getCategory() != null) {
+            originalProduct.setCategory(productEdit.getCategory());
+        }
+        productRepository.saveAndFlush(originalProduct);
+
+        return productMapper.entityToDTO(originalProduct);
+    }
+
+    public void deleteById(Integer id) {
+        productRepository.deleteById(id);
     }
 }
