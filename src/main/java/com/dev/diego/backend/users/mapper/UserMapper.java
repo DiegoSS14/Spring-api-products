@@ -11,9 +11,17 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.dev.diego.backend.users.User;
 import com.dev.diego.backend.users.dto.UserDTO;
+import com.dev.diego.backend.users.dto.UserRegisterDTO;
+import com.dev.diego.backend.users.dto.UserRegistredDTO;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
+
+
+    public UserRegistredDTO registerToRegistred(UserRegisterDTO user);
+    public User registerToUser(UserRegisterDTO user);
+    public UserRegistredDTO userToRegistred(User user);
+    public UserRegistredDTO registredToRegister(UserRegistredDTO userRegisterDTO);
 
     @Mappings({
         @Mapping(source = "id", target = "id", qualifiedByName = "uuidToOptional"),
