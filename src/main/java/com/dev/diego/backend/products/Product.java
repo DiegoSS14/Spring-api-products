@@ -17,11 +17,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "products")
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "products")
 public class Product {
 
     @Id

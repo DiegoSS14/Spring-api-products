@@ -1,7 +1,6 @@
 package com.dev.diego.backend.products;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
