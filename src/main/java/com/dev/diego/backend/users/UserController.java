@@ -38,7 +38,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserRegistredDTO> postMethodName(@RequestBody UserRegisterDTO user) {
-        return ResponseEntity.status(201).body(userService.userRegister(user));
+        return ResponseEntity.status(201).body(userService.register(user));
     }
     
     

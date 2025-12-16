@@ -14,12 +14,12 @@ CREATE TABLE users (
     id UUID PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL
+    password VARCHAR(100) NOT NULL
 );
 
 INSERT INTO users (id, name, email, password) VALUES
-('550e8400-e29b-41d4-a716-446655440000', 'Diego Sousa', 'diego@teste.com', '123'),
-('b2b1b5a2-5d4b-4f7b-9e5d-3f9d0a3c8e21', 'Filipe Sousa', 'filipe@teste.com', '123');
+('550e8400-e29b-41d4-a716-446655440000', 'Diego Sousa', 'diego@teste.com', '$2a$12$naluoPrCCUnWIl0HJhaV5.XDjeKLqaRjwcj2bKfBdAzwyNXWtPozu'),
+('b2b1b5a2-5d4b-4f7b-9e5d-3f9d0a3c8e21', 'Filipe Sousa', 'filipe@teste.com', '$2a$12$ZAl3B2ak1a8XDnF4RdWR9Ogi4WYW6xUBhW283artJZm9q.NFCe93a');
 
 INSERT INTO products (name, description, price, category) VALUES
 ('Notebook Acer Nitro V15', 'Notebook 15pol 165hz, ssd de 512gb, 32gb de ram, RTX 4060 8gb', 5700.00, 'ELETRONICO'),
