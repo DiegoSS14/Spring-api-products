@@ -1,6 +1,11 @@
 package com.dev.diego.backend.users;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,13 +18,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class  User {
+public class  User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,5 +37,22 @@ public class  User {
     private String email;
 
     @Column(name = "password", nullable = false, length = 50)
-    private String password;
+    private String senha;
+
+
+    @Override
+    public String getPassword() {
+        return getSenha();
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
 }

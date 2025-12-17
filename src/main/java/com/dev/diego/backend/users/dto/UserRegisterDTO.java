@@ -23,5 +23,5 @@ public class UserRegisterDTO {
     private String email;
 
     @NotBlank(message = "Name is required")
-    private String password;
+    private String senha;
 }

@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.diego.backend.users.dto.UserDTO;
+import com.dev.diego.backend.users.dto.UserLoggedDTO;
+import com.dev.diego.backend.users.dto.UserLoginDTO;
 import com.dev.diego.backend.users.dto.UserRegisterDTO;
 import com.dev.diego.backend.users.dto.UserRegistredDTO;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
@@ -37,9 +40,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserRegistredDTO> postMethodName(@RequestBody UserRegisterDTO user) {
+    public ResponseEntity<UserRegistredDTO> register(@Valid @RequestBody UserRegisterDTO user) {
         return ResponseEntity.status(201).body(userService.register(user));
     }
     
+    @PostMapping("/login")
+    public ResponseEntity<UserLoggedDTO> login(@Valid @RequestBody UserLoginDTO userLogin) {
+        return ResponseEntity.status(202).body(userService.login(userLogin));
+    }
     
 }
