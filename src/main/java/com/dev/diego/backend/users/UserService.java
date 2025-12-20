@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.dev.diego.backend.exceptions.UserAlreadyExists;
 import com.dev.diego.backend.exceptions.UserNotExists;
+import com.dev.diego.backend.jwt.JwtService;
 import com.dev.diego.backend.users.dto.UserDTO;
 import com.dev.diego.backend.users.dto.UserLoggedDTO;
 import com.dev.diego.backend.users.dto.UserLoginDTO;
@@ -28,16 +29,20 @@ public class UserService implements UserDetailsService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
     public UserService(
             UserRepository userRepository,
             UserMapper userMapper,
             PasswordEncoder passwordEncoder,
-            @Lazy AuthenticationManager authenticationManager) {
+            @Lazy AuthenticationManager authenticationManager,
+            JwtService jwtService
+        ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
     public List<UserDTO> getAll() {
@@ -68,8 +73,9 @@ public class UserService implements UserDetailsService {
         UsernamePasswordAuthenticationToken emailPassword = new UsernamePasswordAuthenticationToken(
                 userLogin.getEmail(), userLogin.getSenha());
         authenticationManager.authenticate(emailPassword);
+        String token = jwtService.generateToken(user.getEmail());
         UserLoggedDTO userLogged = userMapper.loginToLogged(userLogin);
-        userLogged.setToken("Token...");
+        userLogged.setToken(token);
         return userLogged;
     }
 
