@@ -1,7 +1,10 @@
 package com.dev.diego.backend.users.dto;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import com.dev.diego.backend.products.dto.ProductDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -26,6 +29,8 @@ public class UserDTO {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email")
     private String email;
+
+    private List<ProductDTO> products;
     
     private Optional<String> senha;
 }

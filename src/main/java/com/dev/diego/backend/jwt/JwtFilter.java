@@ -2,11 +2,14 @@ package com.dev.diego.backend.jwt;
 
 import java.io.IOException;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.dev.diego.backend.exceptions.ErroResponse;
 import com.dev.diego.backend.users.User;
 import com.dev.diego.backend.users.UserRepository;
 
@@ -33,10 +36,10 @@ public class JwtFilter extends OncePerRequestFilter {
             User user = userRepository.findByEmail(email);
 
             if (user == null) {
-                throw new RuntimeException("Invalid token");
+                throw new BadCredentialsException("Invalid token");
             }
 
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), null, user.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         }

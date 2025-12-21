@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Optional;
 
 import com.dev.diego.backend.products.Category;
+import com.dev.diego.backend.users.dto.UserRegistredDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,4 +39,6 @@ public class ProductDTO {
     
     @NotNull(message = "Field category is required")
     private Category category;
+
+    private UserRegistredDTO user;
 }

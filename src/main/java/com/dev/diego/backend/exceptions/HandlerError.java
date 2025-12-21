@@ -3,6 +3,7 @@ package com.dev.diego.backend.exceptions;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,6 +16,11 @@ public class HandlerError extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErroResponse> runtimeExceptionFormat(RuntimeException e) {
         return ResponseEntity.badRequest().body(new ErroResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErroResponse> badCredentialsException(BadCredentialsException e) {
+        return ResponseEntity.badRequest().body(new ErroResponse("Invalid e-mail or password"));
     }
 
     @Override
